@@ -2,69 +2,103 @@ import React from "react";
 import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Welcome = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.slideHeader}>
-        <MaterialCommunityIcons
-          size={48}
-          name={"weather-sunny"}
-          color={"#fff"}
-        />
-        <Text style={styles.welcomeTitle}>Welcome to myWeather˚</Text>
-        <Text style={styles.subtitle}>View the weather in your city here!</Text>
-        <Pressable
-          style={styles.addButton}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <AntDesign name="pluscircleo" size={24} color="white" />
-        </Pressable>
-      </View>
-      <View style={styles.footerContainer}>
-        <Text style={styles.welcomeTitle}>I am happy to see you! :D</Text>
-      </View>
-    </SafeAreaView>
+    <LinearGradient
+      colors={["#ffffff", "#0042ff"]}
+      style={styles.container}
+    >
+      <SafeAreaView style={styles.innerContainer}>
+        <View style={styles.iconContainer}>
+          <MaterialCommunityIcons
+            name="weather-windy-variant"
+            size={350}
+            color="#fff"
+            style={styles.icon}
+          />
+        </View>
+
+        <View style={styles.contentContainer}>
+          <Text style={styles.welcomeTitle}>myWeather˚</Text>
+
+          <Pressable
+            style={({ pressed }) => [
+              styles.getStartedButton,
+              pressed && styles.buttonPressed,
+            ]}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <View style={styles.buttonContent}>
+              <Text style={styles.getStartedText}>Get Started</Text>
+            </View>
+          </Pressable>
+        </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffb400",
   },
-  addButton: {
-    paddingTop: 0,
-    paddingLeft: 0,
-  },
-  slideHeader: {
+  innerContainer: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
   },
-  footerContainer: {
+  iconContainer: {
     flex: 2,
-    alignItems: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  icon: {
+    marginBottom: 10,
+  },
+  contentContainer: {
+    flex: 1,
     justifyContent: "flex-end",
-    paddingLeft: 25,
-    marginBottom: 40,
+    alignItems: "center",
+    marginBottom: 70,
   },
   welcomeTitle: {
-    fontSize: 38,
-    color: "white",
-  },
-  subtitle: {
-    fontSize: 24,
+    fontSize: 36,
     color: "#fff",
-  },
-  error: {
-    color: "#d32f2f",
+    fontWeight: "bold",
     textAlign: "center",
-    marginTop: 20,
+    marginBottom: 10,
+    fontFamily: "System",
+  },
+  getStartedButton: {
+    backgroundColor: "#000",
+    width: "60%",
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 10,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  getStartedText: {
     fontSize: 16,
+    color: "#fff",
+    fontWeight: "bold",
+    fontFamily: "System",
+  },
+  buttonPressed: {
+    transform: [{ scale: 0.98 }],
   },
 });
 

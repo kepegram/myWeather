@@ -11,7 +11,6 @@ const Weather = ({ route }) => {
 
   const { entry } = route.params || {};
 
-  // Update state when `entry` changes
   useEffect(() => {
     if (entry) {
       switch (entry.description) {
@@ -49,7 +48,7 @@ const Weather = ({ route }) => {
           break;
         case "snow":
           setIcon("weather-snowy");
-          setColor("#ffffff"); // Optional: set a default color for snow
+          setColor("#ffffff");
           break;
         case "mist":
           setIcon("weather-fog");
@@ -71,20 +70,34 @@ const Weather = ({ route }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: color }}>
+    <SafeAreaView style={[styles.container, { backgroundColor: color }]}>
       <Pressable
         style={styles.addButton}
         onPress={() => navigation.navigate("Home")}
       >
         <Ionicons name="arrow-back" size={24} color="white" />
       </Pressable>
-      <View style={styles.slideHeader}>
-        <MaterialCommunityIcons size={48} name={icon} color={"#fff"} />
-        <Text style={styles.welcomeTitle}>{entry.city}</Text>
-        <Text style={styles.subtitle}>{entry.temp}˚F</Text>
+      <View style={styles.header}>
+        <MaterialCommunityIcons size={64} name={icon} color={"#fff"} />
+        <View style={styles.temperatureContainer}>
+          <Text style={styles.city}>{entry.city}</Text>
+          <Text style={styles.temperature}>{entry.temp}˚F</Text>
+          <Text style={styles.description}>{entry.description}</Text>
+        </View>
       </View>
-      <View style={styles.footerContainer}>
-        <Text style={styles.welcomeTitle}>{entry.description}</Text>
+      <View style={styles.detailsContainer}>
+        <View style={styles.detailItem}>
+          <Text style={styles.detailLabel}>Humidity:</Text>
+          <Text style={styles.detailValue}>{entry.humidity}%</Text>
+        </View>
+        <View style={styles.detailItem}>
+          <Text style={styles.detailLabel}>Pressure:</Text>
+          <Text style={styles.detailValue}>{entry.pressure} hPa</Text>
+        </View>
+        <View style={styles.detailItem}>
+          <Text style={styles.detailLabel}>Wind Speed:</Text>
+          <Text style={styles.detailValue}>{entry.windSpeed} m/s</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -93,31 +106,54 @@ const Weather = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e0f7fa",
+    padding: 20,
   },
   addButton: {
     paddingTop: 30,
-    paddingLeft: 8,
   },
-  slideHeader: {
-    flex: 1,
+  header: {
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 20,
   },
-  footerContainer: {
-    flex: 2,
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
-    paddingLeft: 25,
-    marginBottom: 40,
+  temperatureContainer: {
+    alignItems: "center",
   },
-  welcomeTitle: {
-    fontSize: 38,
-    color: "white",
-  },
-  subtitle: {
+  city: {
     fontSize: 24,
-    color: "#fff",
+    color: "white",
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  temperature: {
+    fontSize: 64,
+    color: "white",
+    fontWeight: "bold",
+  },
+  description: {
+    fontSize: 24,
+    color: "white",
+    marginTop: 10,
+    textTransform: "capitalize",
+  },
+  detailsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  detailItem: {
+    alignItems: "center",
+  },
+  detailLabel: {
+    fontSize: 16,
+    color: "white",
+    fontWeight: "600",
+  },
+  detailValue: {
+    fontSize: 18,
+    color: "white",
   },
   error: {
     color: "#d32f2f",

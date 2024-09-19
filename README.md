@@ -7,10 +7,15 @@ Welcome to **myWeather˚**, a beautifully designed and simple weather app that a
 - **Real-Time Weather Information**: Get accurate weather updates for your city.
 - **Dynamic UI**: Weather entries are dynamically updated based on weather conditions. For example, if the weather is cloudy, the component and page will feature a cloudy grey background.
 - **Mobile-Friendly Layout**: Designed for both Android and iOS devices, ensuring compatibility and responsiveness on various screen sizes.
+- **Search Auto-Complete**: Takes a list of the most popular US cities and auto-completes them on user search.
 
 ## Screenshots
 
-![myWeather Welcome Screen](https://example.com/screenshot.png)
+<p>
+<img src = 'assets/app-imgs/welcome-screen.png' height='400'>
+<img src = 'assets/app-imgs/home-screen.png' height='400'>
+<img src = 'assets/app-imgs/weather-screen.png' height='400'>
+</p>
 
 ## Tech Stack & Libraries
 
@@ -32,3 +37,4 @@ Welcome to **myWeather˚**, a beautifully designed and simple weather app that a
    npm run android
    or
    npm run ios
+   ```
